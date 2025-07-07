@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>SGHSS - VidaPlus</title>
+  </head>
+
+  <body>
+    <!-- Conteúdo principal -->
+    <div class="container">
+      <header class="fix">
+        <h1 style="min-width: 500px">VidaPlus Saúde</h1>
+        <nav>
+          <button onclick="logar('paciente')">Logar como Paciente</button>
+          <button onclick="logar('profissional')">Logar como Profissional</button>
+          <button onclick="logar('adm')">Logar como Administrador</button>
+        </nav>
+      </header>
+      <section class="main-banner">
+        <h2>Marque sua consulta com qualidade e segurança</h2>
+      </section>
+      <!-- === -->
+      <section class="cards-container">
+        <div class="card">
+          <h3 style="display: flex; gap: 5px">
+            1.
+            <img src="/img/agendamento.jpeg" alt="iconAgendamento" style="width: 24px; gap: 10px" />
+            Agendamento
+          </h3>
+          <p>Agende uma consulta médica ou odontológica pelo site de forma simples e rápida.</p>
+        </div>
+        <div class="card">
+          <h3 style="display: flex; gap: 5px">
+            2.
+            <img src="/img/acolhi.jpeg" alt="iconAcolhimento" style="width: 24px; gap: 10px" />
+            Acolhimento
+          </h3>
+          <p>Você será direcionado para uma pré-consulta com histórico e queixas registradas.</p>
+        </div>
+        <div class="card">
+          <h3 style="display: flex; gap: 5px">
+            3.
+            <img src="/img/atend.jpeg" alt="iconAtendimento" style="width: 24px; gap: 10px" />
+            Atendimento
+          </h3>
+          <p>No horário marcado, o especialista escolhido realizará seu atendimento com atenção.</p>
+        </div>
+        <div class="card">
+          <h3 style="display: flex; gap: 5px">
+            4.
+            <img src="/img/feedback.jpeg" alt="iconFeedBack" style="width: 24px; gap: 10px" />
+            Pós-consulta
+          </h3>
+          <p>Programe exames, retorno ou teleconsulta com toda comodidade digital.</p>
+        </div>
+      </section>
+      <div class="wrap">
+        <section id="paciente" class="card hidden" style="min-width: 400px">
+          <div>
+            <h3>Cadastro de Paciente</h3>
+            <form id="formCadastro" onsubmit="cadastrarPaciente(event)">
+              <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" required />
+              </div>
+              <div class="form-group">
+                <label for="contato">Contato:</label>
+                <input type="text" id="contato" required maxlength="12" />
+              </div>
+              <button type="submit">Cadastrar</button>
+            </form>
+            <div id="dadosPaciente" class="hidden"></div>
+          </div>
+          <div id="agendamento" style="text-align: center;">
+            <h4>Agendar Consulta</h4>
+            <div class="form-group">
+              <label for="especialidadeSelect">Especialidade:</label>
+              <select id="especialidadeSelect" onchange="mostrarPerfil()">
+                <option value="Dentista">Dentista</option>
+                <option value="Dermatologista">Dermatologista</option>
+                <option value="Cardiologista">Cardiologista</option>
+                <option value="Neurologista">Neurologista</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="horarioSelect">Horário:</label>
+              <select id="horarioSelect"></select>
+            </div>
+            <div id="perfilProfissional" style="margin-bottom: 1rem"></div>
+            <div class="btnDiv">
+              <button onclick="agendarConsulta()">Agendar</button>
+              <button onclick="cancelarAgendamento()">Cancelar</button>
+            </div>
+            <div id="agendamentoCard"></div>
+          </div>
+        </section>
+        <div class="flex">
+          <section id="profissional" class="card hidden" style="min-width: 400px">
+            <h3>Área do Profissional</h3>
+            <div class="form-group">
+              <label for="profissionalSelect">Selecione o profissional:</label>
+              <select id="profissionalSelect" onchange="exibirPerfilProfissional()">
+                <option value="Dentista">Dr. João - Dentista</option>
+                <option value="Dermatologista">Dra. Carla - Dermatologista</option>
+                <option value="Cardiologista">Dr. Marcos - Cardiologista</option>
+                <option value="Neurologista">Dra. Lúcia - Neurologista</option>
+              </select>
+            </div>
+            <div id="perfilSelecionado"></div>
+            <p><strong>Consulta agendada:</strong></p>
+            <div id="consultaProfissional"></div>
+            <button>
+              <span style="color: #fff">📞 Iniciar Teleatendimento</span>
+            </button>
+          </section>
+        </div>
+      </div>
+      <div class="flex">
+        <section id="adm" class="card hidden" style="min-width: 700px">
+          <h3>Administração Hospitalar</h3>
+          <div class="flex">
+            <div>
+              <h4>Controle de Leitos</h4>
+              <div class="form-group">
+                <label for="leito">Número do Leito:</label>
+                <input type="text" id="leito" />
+              </div>
+              <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status">
+                  <option value="disponivel">Disponível</option>
+                  <option value="ocupado">Ocupado</option>
+                  <option value="manutencao">Manutenção</option>
+                </select>
+              </div>
+              <button onclick="adicionarLeito()">Adicionar Leito</button>
+              <table id="tabelaLeitos">
+                <thead>
+                  <tr>
+                    <th>Leito</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <!-- === -->
+            <div>
+              <h4>Suprimentos</h4>
+              <div class="form-group">
+                <label for="suprimento">Nome do Suprimento:</label>
+                <input type="text" id="suprimento" />
+              </div>
+              <div class="form-group">
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" />
+              </div>
+              <button onclick="adicionarSuprimento()">Adicionar Suprimento</button>
+              <table id="tabelaSuprimentos">
+                <thead>
+                  <tr>
+                    <th>Suprimento</th>
+                    <th>Quantidade</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+      <section id="telemedicina" class="card" style="text-align: center">
+        <h3>Telemedicina</h3>
+        <p>Videochamadas e receitas digitais disponíveis em breve.</p>
+      </section>
+      <!-- === -->
+      <section class="tour-section" style="display: flex">
+        <div class="text">
+          <p>Dê um zoom nos detalhes, navegue pelos corredores e sinta-se como se estivesse aqui.</p>
+          <h2>Faça um Tour 360.</h2>
+        </div>
+        <div class="video">
+          <img src="/img/clinica.jpeg" alt="Tour 360" style="border-radius: 15px" />
+        </div>
+      </section>
+      <section id="adm" class="hidden">
+        <div class="card">
+          <h3>Controle de Leitos</h3>
+          <ul>
+            <li>
+              Leito 01 -
+              <strong>Disponível</strong>
+            </li>
+            <li>
+              Leito 02 -
+              <strong>Ocupado</strong>
+            </li>
+            <li>
+              Leito 03 -
+              <strong>Manutenção</strong>
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Controle de Suprimentos</h3>
+          <ul>
+            <li>
+              Água -
+              <strong>50 unidades</strong>
+            </li>
+            <li>
+              Luvas -
+              <strong>200 unidades</strong>
+            </li>
+            <li>
+              Máscaras -
+              <strong>300 unidades</strong>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <footer>
+        <p>&copy; 2025 VidaPlus Saúde. Todos os direitos reservados.</p>
+        <p>Desenvolvido com ❤️ para melhorar sua saúde.</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

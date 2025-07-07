@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Login</title>
+  </head>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    /* Degradê de azul claro para escuro */
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #a0d8ef, #0a2f64);
+      color: #fff;
+    }
+
+    /* Container centralizado */
+    .container {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 2rem 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(6px);
+      text-align: center;
+      width: 300px;
+    }
+
+    /* Título */
+    .container h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      color: #fff;
+    }
+
+    /* Inputs */
+    .container input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    /* Botão como link estilizado */
+    .container a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #00bfff;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .container a:hover {
+      background-color: #009ad6;
+    }
+
+    /* Mensagem de erro/sucesso */
+    .message {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #ffdddd;
+    }
+  </style>
+
+  <body>
+    <div class="container">
+    <h1>VidaPlus</h1>
+
+      <h2>Login</h2>
+      <form>
+        <input type="text" id="username" placeholder="Usuário" required />
+        <input type="password" id="password" placeholder="Senha" required minlength="4" />
+        <a href="content.html?">Entrar</a>
+      </form>
+      <div class="message" id="message"></div>
+    </div>
+  </body>
+</html>
